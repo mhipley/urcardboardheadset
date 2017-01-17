@@ -37,8 +37,6 @@ int hbeatIndex = 1;
 long prevMillis;
 int heat = 0;
 
-int interval = 0;
-
 void loop() {
   // read the value from the sensor
   sensorValue = analogRead(sensorPin);
@@ -52,14 +50,11 @@ void loop() {
   brightnessScaled = sensorValue / 1000.0 * 255;
   float pulseScaled = ((sensorValue / 900.00) * 10);
   float pulse = 4 - ((pulseScaled * 3) /10);
-  interval = 5000 / pulseScaled;
-
-  //float hue =  sensorScaled * 1.5 / 200;
   float hue = -(1200 - sensorValue) * 1.5 / 2400;
   int rgb[3];
+ 
+  // convert color
   hslToRgb(hue, 1.0, 0.5, rgb);
-
-
   int r = rgb[0];
   r = map(r, 0, 1000, 0, brightness);
   int g = rgb[1];
